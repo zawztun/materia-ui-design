@@ -1,5 +1,6 @@
-import React from 'react'
-import {useSelector} from 'react-redux'
+import React from 'react';
+import {Link} from 'react-router-dom';
+import {useSelector} from 'react-redux';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
@@ -16,46 +17,50 @@ import useStyles from '../styles'
 const ProductComponents = () => {
     const classes = useStyles();
     const products = useSelector((state) => state.allProducts.products );
+  
+const renderlist = products.map((product) => {
+    const {id, image, price, title, category} = product;
+          return ( 
+            <Grid item key={product.id} xs={12} sm={6} md={3}>
+                <Card className={classes.card}>
+                    <Link to = {`/product/${id}`}>
+                        <CardMedia
+                            className={classes.cardMedia} 
+                            image={image} style = {{display:'cover'}}
+                            title="Image title"
+                        />
+                        <CardContent className={classes.cardContent}>
+                            {/* <Typography gutterBottom variant="h5" component="h2">
+                            Heading
+                            </Typography> */}
+                            <Typography>
+                                {title}
+                            </Typography>
+                        </CardContent>
+                    </Link>
+                    <CardActions>
+                            <Typography>
+                                $ {price}
+                            </Typography>
+                            <Typography>
+                                {category}
+                            </Typography>                    
+                        <Button size="small" color="secondary">
+                            BUY
+                        </Button>
+                    </CardActions>
+                </Card>
+            </Grid>
+            );   
+        });
 
     return (
         <>
          <CssBaseline />
-         <Container className={classes.cardGrid} maxWidth="lg">
+         <Container className={classes.cardGrid} maxWidth="md">
           {/* End hero unit */}
           <Grid container spacing={2}>
-            {products.map((product) => (
-              <Grid item key={product.id} xs={12} sm={6} md={3}>
-                <Card className={classes.card}>
-                  <CardMedia
-                    className={classes.cardMedia} 
-                    image={product.image} style = {{display:'cover'}}
-                    title="Image title"
-                  />
-                  <CardContent className={classes.cardContent}>
-                    {/* <Typography gutterBottom variant="h5" component="h2">
-                      Heading
-                    </Typography> */}
-                    <Typography>
-                     {product.title}
-                    </Typography>
-                  </CardContent>
-                  <CardActions>
-                  <Typography>
-                     $ {product.price}
-                    </Typography>
-                    <Typography>
-                      {product.category}
-                    </Typography>
-                    {/* <Button size="small" color="primary">
-                      View
-                    </Button> */}
-                    <Button size="small" color="primary">
-                    ADD
-                    </Button>
-                  </CardActions>
-                </Card>
-              </Grid>
-            ))}
+                {renderlist}
           </Grid>
         </Container>
         </>

@@ -14,7 +14,7 @@ const App = () => {
                 <Navbar/>
                 <Switch>
                     <Route path = '/' exact component= {ProductList}/>
-                    <Route path = '/product/:productId'  component= {ProductDetails}/>
+                    <Route path = '/product/:productId' exact component= {ProductDetails}/>
                 </Switch>
                 <Footer/>
             </Router>
