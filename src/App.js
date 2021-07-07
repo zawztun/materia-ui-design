@@ -1,12 +1,24 @@
 import React from 'react'
-import Album from './components/Album'
-import Appbar from './components/AppBar'
+import {BrowserRouter as Router , Switch, Route} from 'react-router-dom';
+import Navbar from './components/Navbar'
+import ProductList from './components/ProductList'
+import ProductDetails from './components/ProductDetails'
+import Footer from './components/Footer'
+
+
 
 const App = () => {
     return (
-        <div>
-            <Appbar/>
-            <Album/>
+        <div className = "container">
+            <Router>
+                <Navbar/>
+                <Switch>
+                    <Route path = '/' exact component= {ProductList}/>
+                    <Route path = '/product/:productId'  component= {ProductDetails}/>
+                </Switch>
+                <Footer/>
+            </Router>
+          
         </div>
     )
 }

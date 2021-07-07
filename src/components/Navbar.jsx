@@ -6,7 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import useStyles from '../styles'
 
-const Appbar = () => {
+const Navbar = () => {
     const classes = useStyles();
     return (
         <>
@@ -23,4 +23,4 @@ const Appbar = () => {
     )
 }
 
-export default Appbar
+export default Navbar
